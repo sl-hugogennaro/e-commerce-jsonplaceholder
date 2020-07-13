@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { Header } from './Header'
-import { Card } from './Card'
+import { CardsContainer } from './CardsContainer'
 
 const footerHeight = '15px'
 const FooterUI = styled.footer`
@@ -41,9 +41,7 @@ export const App = () => {
   return (
     <AppUI>
       <Header />
-      {data.map(({ id, title, thumbnailUrl, url }) => (
-        <Card key={id} {...{ id, title, thumbnail: thumbnailUrl, url }} />
-      ))}
+      <CardsContainer data={data} />
       <FooterUI>
         Icons made by{' '}
         <a href="http://www.freepik.com/" title="Freepik">
