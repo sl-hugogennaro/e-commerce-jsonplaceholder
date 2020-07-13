@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
-import { Card } from './Card'
+import Card from './Card'
 import { DataType } from './App'
 
 const CardsContainerUI = styled.section`

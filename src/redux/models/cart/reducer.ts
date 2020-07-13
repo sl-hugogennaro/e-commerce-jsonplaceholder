@@ -8,7 +8,7 @@ export const initialState: CartState = {
 export const reducer = (state = initialState, action: CartActionTypes): CartState => {
   switch (action.type) {
     case ADD_CART_ITEM:
-      return state
+      return { ...state, items: [...state.items, action.payload] }
   }
   return state
 }

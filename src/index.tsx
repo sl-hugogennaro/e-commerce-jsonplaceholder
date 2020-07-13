@@ -3,7 +3,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import styled from 'styled-components'
 // aliased
-import configureStore from 'stores/configureStore'
+import configureStore from './redux/configureStore'
 // locals
 import { App } from './components/App'
 import { Provider } from 'react-redux'
