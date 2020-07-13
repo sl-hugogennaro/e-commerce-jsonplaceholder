@@ -28,20 +28,27 @@ const CardMiscUI = styled.div`
 const CardRightUI = styled.div`
   width: 66%;
 `
-
-export const Card = () => (
-  <CardUI>
-    <CardLeftUI>
-      <img src="" alt="" />
-    </CardLeftUI>
-    <CardRightUI>
-      <CardInfoUI>
-        <h3>Card Title</h3>
-      </CardInfoUI>
-      <CardMiscUI>
-        <div>Price ?</div>
-        <button>Add to cart</button>
-      </CardMiscUI>
-    </CardRightUI>
-  </CardUI>
-)
+type CardProps = {
+  id: number
+  title: string
+  thumbnail: string
+  url: string
+}
+export const Card = ({ title, thumbnail }: CardProps) => {
+  return (
+    <CardUI>
+      <CardLeftUI>
+        <img src={thumbnail} alt="Card thumbnail" />
+      </CardLeftUI>
+      <CardRightUI>
+        <CardInfoUI>
+          <h3>{title}</h3>
+        </CardInfoUI>
+        <CardMiscUI>
+          <div>Some price €</div>
+          <button>Add to cart</button>
+        </CardMiscUI>
+      </CardRightUI>
+    </CardUI>
+  )
+}

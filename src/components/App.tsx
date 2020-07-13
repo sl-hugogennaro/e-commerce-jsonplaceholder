@@ -19,8 +19,15 @@ const FooterUI = styled.footer`
 const AppUI = styled.div`
   /* global styles */
 `
+type APIResponse = {
+  albumId: number
+  id: number
+  thumbnailUrl: string
+  title: string
+  url: string
+}
 export const App = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<APIResponse[]>([])
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos', {
       method: 'GET',
@@ -34,8 +41,8 @@ export const App = () => {
   return (
     <AppUI>
       <Header />
-      {data.map((d, i) => (
-        <Card key={i} {...d} />
+      {data.map(({ id, title, thumbnailUrl, url }) => (
+        <Card key={id} {...{ id, title, thumbnail: thumbnailUrl, url }} />
       ))}
       <FooterUI>
         Icons made by{' '}
