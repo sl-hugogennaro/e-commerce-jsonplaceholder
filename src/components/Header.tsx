@@ -4,6 +4,7 @@ const pad = 20
 const HeaderUI = styled.header`
   width: calc(100% - ${2 * pad}px);
   height: 10vh;
+  min-height: 50px;
   padding: 0 ${pad}px;
   display: flex;
   align-items: center;
