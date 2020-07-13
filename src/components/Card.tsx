@@ -8,6 +8,8 @@ const CardUI = styled.div`
   justify-content: center;
   width: 100%;
   height: fit-content;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 4px 0px rgba(202, 202, 202, 1);
 `
 const CardLeftUI = styled.div`
   width: 33%;
