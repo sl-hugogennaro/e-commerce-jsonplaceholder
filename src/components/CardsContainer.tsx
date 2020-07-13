@@ -6,6 +6,22 @@ import { DataType } from './App'
 
 const CardsContainerUI = styled.section`
   position: relative;
+  margin: 0 auto;
+  width: 100%;
+  /* Mobile first, then */
+  /* Small devices (landscape phones, less than 768px) */
+  @media (min-width: 768.98px) {
+    width: 520px;
+    padding: 0px 10px;
+  }
+
+  /* Large devices (desktops, less than 1200px) */
+  @media (min-width: 1200.98px) {
+    width: 100%;
+    display: grid;
+    grid-gap: 15px 5px;
+    grid-template-columns: auto auto auto;
+  }
 `
 const ContainerNavUI = styled.nav`
   width: 100%;
