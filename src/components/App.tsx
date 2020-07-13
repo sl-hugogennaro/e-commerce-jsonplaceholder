@@ -9,11 +9,6 @@ import { CardsContainer } from './CardsContainer'
 const footerHeight = '15px'
 const FooterUI = styled.footer`
   height: ${footerHeight};
-  position: fixed;
-  bottom: 0;
-  top: auto;
-  left: 0;
-  right: 0;
   font-size: 12px;
   background: white;
 `
