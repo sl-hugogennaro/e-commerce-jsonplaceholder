@@ -13,6 +13,7 @@ const CardUI = styled.div`
 `
 const CardLeftUI = styled.div`
   width: 33%;
+  min-width: 150px;
 `
 const CardInfoUI = styled.div``
 const CardMiscUI = styled.div`
