@@ -3,18 +3,26 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Header } from './Header'
+import { Card } from './Card'
 
+const footerHeight = '5vh'
+const FooterUI = styled.footer`
+  height: ${footerHeight};
+  position: fixed;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+`
 const AppUI = styled.div`
   /* global styles */
-`
-const FooterUI = styled.footer`
-  font-size: 12px;
 `
 
 export const App = () => (
   <AppUI>
     <Header />
-    <section role="main"></section>
+    <Card />
     <FooterUI>
       Icons made by{' '}
       <a href="http://www.freepik.com/" title="Freepik">
