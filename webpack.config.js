@@ -55,10 +55,6 @@ module.exports = (env = {}, argv) => {
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       modules: [path.resolve(__dirname, '../src'), 'node_modules'],
-      alias: {
-        helpers: path.resolve(__dirname, 'src/helpers/'),
-        stores: path.resolve(__dirname, 'src/redux/'),
-      }
     },
 
     plugins,
