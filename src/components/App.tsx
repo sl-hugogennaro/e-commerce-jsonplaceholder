@@ -1,5 +1,5 @@
 // externals
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { Header } from './Header'
@@ -19,13 +19,23 @@ const FooterUI = styled.footer`
 const AppUI = styled.div`
   /* global styles */
 `
-const fakeData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 export const App = () => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/photos', {
+      method: 'GET',
+      headers: new Headers(),
+      mode: 'cors',
+      cache: 'default'
+    })
+      .then((r) => r.json())
+      .then(setData)
+  }, [])
   return (
     <AppUI>
       <Header />
-      {fakeData.map((d, i) => (
-        <Card key={i} />
+      {data.map((d, i) => (
+        <Card key={i} {...d} />
       ))}
       <FooterUI>
         Icons made by{' '}
