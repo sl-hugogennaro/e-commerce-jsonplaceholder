@@ -1,24 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Loader from 'react-loader'
 
 import { Card } from './Card'
+import { DataType } from './App'
 
-const CardsContainerUI = styled.section``
+const CardsContainerUI = styled.section`
+  height: 80%;
+`
 
 type CardsContainerProps = {
-  data: any[]
+  data: DataType[]
 }
+const pageLen = 15
 export const CardsContainer = ({ data }: CardsContainerProps) => {
+  const [page, setPage] = useState(1)
+  const [cards, setCards] = useState([])
+
+  useEffect(() => {
+    if (page === 1) {
+      setCards(data.slice(0, pageLen))
+    } else {
+      setCards(data.slice(page * pageLen, pageLen))
+    }
+  }, [data, page])
+
   return (
     <CardsContainerUI>
-      {data.length > 0 ? (
-        data.map(({ id, title, thumbnailUrl, url }) => (
-          <Card key={id} {...{ id, title, thumbnail: thumbnailUrl, url }} />
-        ))
-      ) : (
-        <Loader />
-      )}
+      {cards.map(({ id, title, thumbnailUrl, url }) => (
+        <Card key={id} {...{ id, title, thumbnail: thumbnailUrl, url }} />
+      ))}
     </CardsContainerUI>
   )
 }

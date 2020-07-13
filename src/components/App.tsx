@@ -1,6 +1,7 @@
 // externals
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Loader from 'react-loader'
 
 import { Header } from './Header'
 import { CardsContainer } from './CardsContainer'
@@ -19,7 +20,7 @@ const FooterUI = styled.footer`
 const AppUI = styled.div`
   /* global styles */
 `
-type APIResponse = {
+export type DataType = {
   albumId: number
   id: number
   thumbnailUrl: string
@@ -27,7 +28,7 @@ type APIResponse = {
   url: string
 }
 export const App = () => {
-  const [data, setData] = useState<APIResponse[]>([])
+  const [data, setData] = useState<DataType[]>([])
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos', {
       method: 'GET',
@@ -41,7 +42,7 @@ export const App = () => {
   return (
     <AppUI>
       <Header />
-      <CardsContainer data={data} />
+      {data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
       <FooterUI>
         Icons made by{' '}
         <a href="http://www.freepik.com/" title="Freepik">
