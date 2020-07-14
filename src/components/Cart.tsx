@@ -10,8 +10,11 @@ const CartUI = styled.div`
   background: white;
   width: 100%;
   height: 100%;
+  z-index: 1;
 `
 
-export const Cart = () => {
+const Cart = () => {
   return <CartUI>Cart content</CartUI>
 }
+
+export default Cart

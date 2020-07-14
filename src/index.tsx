@@ -1,12 +1,12 @@
 // externals
 import React from 'react'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import styled from 'styled-components'
 // aliased
 import configureStore from './redux/configureStore'
 // locals
-import { App } from './components/App'
-import { Provider } from 'react-redux'
+import App from './components/App'
 
 const FullPageApp = styled.div`
   width: 100%;

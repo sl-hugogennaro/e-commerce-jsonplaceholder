@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Loader from 'react-loader'
+import { useSelector } from 'react-redux'
 
+import { isCartOpen } from '../redux/models/cart/selectors'
 import Header from './Header'
+import Cart from './Cart'
 import { CardsContainer } from './CardsContainer'
 
 const footerHeight = '15px'
@@ -13,6 +16,7 @@ const FooterUI = styled.footer`
   background: white;
 `
 const AppUI = styled.div`
+  position: relative;
   /* global styles */
 `
 export type DataType = {
@@ -22,8 +26,10 @@ export type DataType = {
   title: string
   url: string
 }
-export const App = () => {
+
+const App = () => {
   const [data, setData] = useState<DataType[]>([])
+  const shouldShowCart = useSelector(isCartOpen)
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos', {
       method: 'GET',
@@ -36,6 +42,7 @@ export const App = () => {
   }, [])
   return (
     <AppUI>
+      {shouldShowCart && <Cart />}
       <Header />
       {data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
       <FooterUI>
@@ -51,3 +58,5 @@ export const App = () => {
     </AppUI>
   )
 }
+
+export default App
