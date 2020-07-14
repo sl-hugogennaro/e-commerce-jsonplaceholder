@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import Card from './Card'
-import { DataType } from './App'
+import { DataType } from '../redux/models/engine/types'
 
 const CardsContainerUI = styled.section`
   position: relative;

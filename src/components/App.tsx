@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Loader from 'react-loader'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { isCartOpen } from '../redux/models/cart/selectors'
+import { fetchData } from '../redux/models/engine/actions'
+import { getData } from '../redux/models/engine/selectors'
 import Header from './Header'
 import Cart from './Cart'
 import { CardsContainer } from './CardsContainer'
@@ -21,26 +23,13 @@ const AppUI = styled.div`
     height: 100%;
   }
 `
-export type DataType = {
-  albumId: number
-  id: number
-  thumbnailUrl: string
-  title: string
-  url: string
-}
 
 const App = () => {
-  const [data, setData] = useState<DataType[]>([])
+  const dispatch = useDispatch()
+  const data = useSelector(getData)
   const shouldShowCart = useSelector(isCartOpen)
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/photos', {
-      method: 'GET',
-      headers: new Headers(),
-      mode: 'cors',
-      cache: 'default'
-    })
-      .then((r) => r.json())
-      .then(setData)
+    fetchData()(dispatch)
   }, [])
   return (
     <AppUI>
