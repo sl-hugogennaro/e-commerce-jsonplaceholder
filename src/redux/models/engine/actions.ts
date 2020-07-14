@@ -1,11 +1,9 @@
-import { EngineActionTypes, DataType, FETCH_DATA, RECEIVED_DATA } from './types'
+import { EngineActionTypes, DataType, RECEIVED_DATA, FILTER_DATA } from './types'
 
-export const receivedData = (newData: DataType[]): EngineActionTypes => {
-  return {
-    type: RECEIVED_DATA,
-    payload: newData
-  }
-}
+export const receivedData = (newData: DataType[]): EngineActionTypes => ({
+  type: RECEIVED_DATA,
+  payload: newData
+})
 
 export const fetchData = () => {
   return (dispatch) => {
@@ -21,3 +19,8 @@ export const fetchData = () => {
       })
   }
 }
+
+export const filterData = (like: string): EngineActionTypes => ({
+  type: FILTER_DATA,
+  payload: like
+})

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { openCart, closeCart } from '../redux/models/cart/actions'
+import { filterData } from '../redux/models/engine/actions'
 import { isCartOpen, getItemsCount } from '../redux/models/cart/selectors'
+import { useDebounce } from '../helpers/useDebounce'
 
 const pad = 20
 const HeaderUI = styled.header`
@@ -58,13 +60,18 @@ const Header = () => {
   const dispatch = useDispatch()
   const isOpen = useSelector(isCartOpen)
   const cartCount = useSelector(getItemsCount)
+  const [search, setSearch] = useState('')
+  const debouncedSearch = useDebounce(search)
+  useEffect(() => {
+    dispatch(filterData(debouncedSearch))
+  }, [debouncedSearch])
 
   return (
     <HeaderUI>
       <div className="">Logo ?</div>
-      <SearchUI className="interactible hidden">
+      <SearchUI className="interactible">
         <img width={`${svgSize}px`} height={`${svgSize}px`} src="assets/search.svg" alt="Chercher par titre" />
-        <input type="text" name="search" />
+        <input type="text" name="search" onKeyUp={(e) => setSearch((e.target as any).value)} />
       </SearchUI>
       <ShopButtonUI
         className="interactible"
@@ -76,7 +83,7 @@ const Header = () => {
           }
         }}
       >
-        <img src={isOpen ? "assets/grocery.svg" : "assets/shopping-basket.svg"} alt="Aller au panier" />
+        <img src={isOpen ? 'assets/grocery.svg' : 'assets/shopping-basket.svg'} alt="Aller au panier" />
         <span>{cartCount}</span>
       </ShopButtonUI>
     </HeaderUI>
