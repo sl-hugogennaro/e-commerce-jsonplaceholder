@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { getItems } from '../redux/models/cart/selectors'
-import { CardUI, CardLeftUI, CardRightUI, CardMiscUI, CardInfoUI } from './Card/UI'
 import { removeCartItem, addCartItem } from '../redux/models/cart/actions'
+import { CardUI, CardLeftUI, CardRightUI, CardMiscUI, CardInfoUI } from './Card/UI'
+import ResponsiveGrid from './ResponsiveGrid'
 
 const CartUI = styled.div`
   width: 100%;
@@ -33,27 +35,31 @@ const Cart = () => {
   return (
     <CartUI>
       {items.length > 0 ? (
-        items.map(([{ id, thumbnail, title }, qty]) => (
-          <CardUI key={id}>
-            <CardLeftUI>
-              <img src={thumbnail} alt="Card thumbnail" />
-            </CardLeftUI>
-            <CardRightUI>
-              <CardInfoUI>
-                <h3>{title}</h3>
-              </CardInfoUI>
-              <CardMiscUI>
-                <QuantityUI>
-                  <QuantityButtonUI onClick={() => dispatch(removeCartItem({ itemId: id, qty: 1 }))}>
-                    -
-                  </QuantityButtonUI>
-                  <div>Quantity: {qty}</div>
-                  <QuantityButtonUI onClick={() => dispatch(addCartItem({ id, title, thumbnail }))}>+</QuantityButtonUI>
-                </QuantityUI>
-              </CardMiscUI>
-            </CardRightUI>
-          </CardUI>
-        ))
+        <ResponsiveGrid>
+          {items.map(([{ id, thumbnail, title }, qty]) => (
+            <CardUI key={id}>
+              <CardLeftUI>
+                <img src={thumbnail} alt="Card thumbnail" />
+              </CardLeftUI>
+              <CardRightUI>
+                <CardInfoUI>
+                  <h3>{title}</h3>
+                </CardInfoUI>
+                <CardMiscUI>
+                  <QuantityUI>
+                    <QuantityButtonUI onClick={() => dispatch(removeCartItem({ itemId: id, qty: 1 }))}>
+                      -
+                    </QuantityButtonUI>
+                    <div>Quantity: {qty}</div>
+                    <QuantityButtonUI onClick={() => dispatch(addCartItem({ id, title, thumbnail }))}>
+                      +
+                    </QuantityButtonUI>
+                  </QuantityUI>
+                </CardMiscUI>
+              </CardRightUI>
+            </CardUI>
+          ))}
+        </ResponsiveGrid>
       ) : (
         <div>Your cart is empty</div>
       )}
