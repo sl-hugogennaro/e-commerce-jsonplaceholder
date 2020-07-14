@@ -1,11 +1,15 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CopyPlugin = require('copy-webpack-plugin');
 
 const basePlugins = [
   new HtmlWebpackPlugin({
     template: './templates/default.html',
-  }),
+  })
+]
+const prodPlugins = [
+  new CopyPlugin({ patterns: [{ from: 'assets ', to: 'assets' }] })
 ]
 
 const devPlugins = []
@@ -30,8 +34,8 @@ module.exports = (env = {}, argv) => {
 
   if (isAnalyze) {
     plugins = plugins.concat(analyzePlugins)
-  } else if (!isProduction) { // implicit "!isAnalyze"
-    plugins = plugins.concat(devPlugins)
+  } else {// implicit "!isAnalyze"
+    plugins = isProduction ? plugins.concat(prodPlugins) : plugins.concat(devPlugins)
   }
 
   return {
