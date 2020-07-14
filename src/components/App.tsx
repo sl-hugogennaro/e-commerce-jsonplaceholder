@@ -42,9 +42,8 @@ const App = () => {
   }, [])
   return (
     <AppUI>
-      {shouldShowCart && <Cart />}
       <Header />
-      {data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
+      {shouldShowCart ? <Cart /> : data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
       <FooterUI>
         Icons made by{' '}
         <a href="http://www.freepik.com/" title="Freepik">
