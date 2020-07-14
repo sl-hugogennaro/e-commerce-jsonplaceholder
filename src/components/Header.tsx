@@ -76,7 +76,7 @@ const Header = () => {
           }
         }}
       >
-        <img src="assets/shopping-basket.svg" alt="Aller au panier" />
+        <img src={isOpen ? "assets/grocery.svg" : "assets/shopping-basket.svg"} alt="Aller au panier" />
         <span>{cartCount}</span>
       </ShopButtonUI>
     </HeaderUI>

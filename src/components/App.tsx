@@ -49,14 +49,28 @@ const App = () => {
         {shouldShowCart ? <Cart /> : data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
       </section>
       <FooterUI>
-        Icons made by{' '}
-        <a href="http://www.freepik.com/" title="Freepik">
-          Freepik
-        </a>{' '}
-        from{' '}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
+        Icons made by:{' '}
+        <ul>
+          <li>
+            <a href="http://www.freepik.com/" title="Freepik">
+              Freepik
+            </a>{' '}
+            from{' '}
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              www.flaticon.com
+            </a>
+          </li>
+          <li>
+            <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">
+              iconixar
+            </a>{' '}
+            from{' '}
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              {' '}
+              www.flaticon.com
+            </a>
+          </li>
+        </ul>
       </FooterUI>
     </AppUI>
   )
