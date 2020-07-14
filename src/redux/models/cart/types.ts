@@ -5,28 +5,33 @@ export const CLOSE_CART = 'CLOSE_CART'
 
 export interface CartItem {
   id: number
+  title: string
+  thumbnail: string
 }
 
-interface AddCartItemAction {
+export interface AddCartItemAction {
   type: typeof ADD_CART_ITEM
   payload: CartItem
 }
 
-interface RemoveCartItemAction {
+export interface RemoveCartItemAction {
   type: typeof REMOVE_CART_ITEM
-  payload: CartItem['id']
+  payload: {
+    itemId: CartItem['id']
+    qty: number
+  }
 }
 
-interface OpenCartAction {
+export interface OpenCartAction {
   type: typeof OPEN_CART
 }
-interface CloseCartAction {
+export interface CloseCartAction {
   type: typeof CLOSE_CART
 }
 
 export type CartActionTypes = AddCartItemAction | RemoveCartItemAction | OpenCartAction | CloseCartAction
 
 export type CartState = {
-  items: CartItem[]
+  items: [CartItem, number][]
   isOpen: boolean
 }

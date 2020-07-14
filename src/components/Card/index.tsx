@@ -20,8 +20,7 @@ const Card = ({ id, title, thumbnail, addToCart }: CardProps) => {
           <h3>{title}</h3>
         </CardInfoUI>
         <CardMiscUI>
-          <div>Some price €</div>
-          <button onClick={() => addToCart(id)}>Add to cart</button>
+          <button onClick={() => addToCart({ id, title, thumbnail })}>Add to cart</button>
         </CardMiscUI>
       </CardRightUI>
     </CardUI>

@@ -1,25 +1,64 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getItems } from '../redux/models/cart/selectors'
+import { CardUI, CardLeftUI, CardRightUI, CardMiscUI, CardInfoUI } from './Card/UI'
+import { removeCartItem, addCartItem } from '../redux/models/cart/actions'
 
 const CartUI = styled.div`
-  /* position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white; */
   width: 100%;
   height: 100%;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `
-
+const QuantityUI = styled.div`
+  display: flex;
+  width: 150px;
+  align-items: center;
+  justify-content: space-evenly;
+`
+const QuantityButtonUI = styled.button`
+  background: initial;
+  border-radius: 4px;
+  & > img {
+    width: 25px;
+    height: 25px;
+  }
+`
 const Cart = () => {
   const items = useSelector(getItems)
-  return <CartUI>
-    {items.length}
-  </CartUI>
+  const dispatch = useDispatch()
+  return (
+    <CartUI>
+      {items.length > 0 ? (
+        items.map(([{ id, thumbnail, title }, qty]) => (
+          <CardUI key={id}>
+            <CardLeftUI>
+              <img src={thumbnail} alt="Card thumbnail" />
+            </CardLeftUI>
+            <CardRightUI>
+              <CardInfoUI>
+                <h3>{title}</h3>
+              </CardInfoUI>
+              <CardMiscUI>
+                <QuantityUI>
+                  <QuantityButtonUI onClick={() => dispatch(removeCartItem({ itemId: id, qty: 1 }))}>
+                    -
+                  </QuantityButtonUI>
+                  <div>Quantity: {qty}</div>
+                  <QuantityButtonUI onClick={() => dispatch(addCartItem({ id, title, thumbnail }))}>+</QuantityButtonUI>
+                </QuantityUI>
+              </CardMiscUI>
+            </CardRightUI>
+          </CardUI>
+        ))
+      ) : (
+        <div>Your cart is empty</div>
+      )}
+    </CartUI>
+  )
 }
 
 export default Cart
