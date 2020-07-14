@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { connect, ConnectedProps } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { openCart } from '../redux/models/cart/actions'
+import { openCart, closeCart } from '../redux/models/cart/actions'
+import { isCartOpen } from '../redux/models/cart/selectors'
 
 const pad = 20
 const HeaderUI = styled.header`
@@ -39,25 +40,31 @@ const SearchUI = styled.div`
   display: flex;
 `
 
-const mapDispatchToProps = {
-  goToCart: () => openCart()
+const Header = () => {
+  const dispatch = useDispatch()
+  const isOpen = useSelector(isCartOpen)
+
+  return (
+    <HeaderUI>
+      <div className="">Logo ?</div>
+      <SearchUI className="interactible hidden">
+        <img width={`${svgSize}px`} height={`${svgSize}px`} src="assets/search.svg" alt="Chercher par titre" />
+        <input type="text" name="search" />
+      </SearchUI>
+      <ShopButtonUI
+        className="interactible"
+        onClick={() => {
+          if (isOpen) {
+            dispatch(closeCart())
+          } else {
+            dispatch(openCart())
+          }
+        }}
+      >
+        <img src="assets/shopping-basket.svg" alt="Aller au panier" />
+      </ShopButtonUI>
+    </HeaderUI>
+  )
 }
 
-export const connector = connect(null, mapDispatchToProps)
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-type HeaderProps = PropsFromRedux & {}
-const Header = ({ goToCart }: HeaderProps) => (
-  <HeaderUI>
-    <div className="">Logo ?</div>
-    <SearchUI className="interactible hidden">
-      <img width={`${svgSize}px`} height={`${svgSize}px`} src="assets/search.svg" alt="Chercher par titre" />
-      <input type="text" name="search" />
-    </SearchUI>
-    <ShopButtonUI className="interactible" onClick={() => goToCart()}>
-      <img src="assets/shopping-basket.svg" alt="Aller au panier" />
-    </ShopButtonUI>
-  </HeaderUI>
-)
-
-export default connector(Header)
+export default Header

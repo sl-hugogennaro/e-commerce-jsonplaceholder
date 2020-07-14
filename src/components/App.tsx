@@ -16,8 +16,10 @@ const FooterUI = styled.footer`
   background: white;
 `
 const AppUI = styled.div`
-  position: relative;
-  /* global styles */
+  & > section[role='main'] {
+    position: relative;
+    height: 100%;
+  }
 `
 export type DataType = {
   albumId: number
@@ -43,7 +45,9 @@ const App = () => {
   return (
     <AppUI>
       <Header />
-      {shouldShowCart ? <Cart /> : data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
+      <section role="main">
+        {shouldShowCart ? <Cart /> : data && data.length > 0 ? <CardsContainer data={data} /> : <Loader />}
+      </section>
       <FooterUI>
         Icons made by{' '}
         <a href="http://www.freepik.com/" title="Freepik">
