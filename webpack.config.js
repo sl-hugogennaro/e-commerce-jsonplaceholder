@@ -9,7 +9,7 @@ const basePlugins = [
   })
 ]
 const prodPlugins = [
-  new CopyPlugin({ patterns: [{ from: 'assets ', to: 'assets' }] })
+  new CopyPlugin({ patterns: [{ from: path.join(__dirname, 'assets'), to: 'assets' }] })
 ]
 
 const devPlugins = []
