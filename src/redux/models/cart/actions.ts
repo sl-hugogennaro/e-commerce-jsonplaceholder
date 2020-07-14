@@ -1,9 +1,11 @@
-import { CartItem, ADD_CART_ITEM, CartActionTypes } from './types'
+import { CartItem, ADD_CART_ITEM, OPEN_CART, CLOSE_CART, CartActionTypes } from './types'
 
-// TypeScript infers that this function is returning SendMessageAction
-export function addCartItem(newCartItem: CartItem): CartActionTypes {
+export const addCartItem = (newCartItem: CartItem): CartActionTypes => {
   return {
     type: ADD_CART_ITEM,
     payload: newCartItem
   }
 }
+
+export const openCart = (): CartActionTypes => ({ type: OPEN_CART })
+export const closeCart = (): CartActionTypes => ({ type: CLOSE_CART })

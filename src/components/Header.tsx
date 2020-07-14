@@ -1,5 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect, ConnectedProps } from 'react-redux'
+
+import { openCart } from '../redux/models/cart/actions'
+
 const pad = 20
 const HeaderUI = styled.header`
   width: calc(100% - ${2 * pad}px);
@@ -35,15 +39,25 @@ const SearchUI = styled.div`
   display: flex;
 `
 
-export const Header = () => (
+const mapDispatchToProps = {
+  goToCart: () => openCart()
+}
+
+export const connector = connect(null, mapDispatchToProps)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type HeaderProps = PropsFromRedux & {}
+const Header = ({ goToCart }: HeaderProps) => (
   <HeaderUI>
     <div className="">Logo ?</div>
     <SearchUI className="interactible hidden">
       <img width={`${svgSize}px`} height={`${svgSize}px`} src="assets/search.svg" alt="Chercher par titre" />
       <input type="text" name="search" />
     </SearchUI>
-    <ShopButtonUI className="interactible">
+    <ShopButtonUI className="interactible" onClick={() => goToCart()}>
       <img src="assets/shopping-basket.svg" alt="Aller au panier" />
     </ShopButtonUI>
   </HeaderUI>
 )
+
+export default connector(Header)

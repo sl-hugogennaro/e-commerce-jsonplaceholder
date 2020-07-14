@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Loader from 'react-loader'
 
-import { Header } from './Header'
+import Header from './Header'
 import { CardsContainer } from './CardsContainer'
 
 const footerHeight = '15px'
